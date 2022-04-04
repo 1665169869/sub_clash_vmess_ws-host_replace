@@ -20,7 +20,9 @@ def _get(url):
     if r.status_code == 200:
         return r.text
 
-
+@app.route("/")
+def index():
+    return "<h1>Hello World</h1>"
 
 @app.route("/api/sub", methods=['GET'])
 def sub():
