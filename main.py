@@ -11,12 +11,21 @@ ADDR_PORT = 4561
 
 app = Flask(__name__)
 flask_cors.CORS(app, supports_credentials=True)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
+# @app.after_request
+# def add_headers(r):
+#     r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+#     r.headers["Pragma"] = "no-cache"
+#     r.headers["Expires"] = "0"
+#     r.headers['Cache-Control'] = 'public, max-age=0'
+#     return r
 
 def _get(url):
     """
     获取配置文件 返回文本内容
     """
-    r = requests.get(url)
+    r = requests.get(url, headers={"User-Agent": "ClashforWindows/0.17.3"})
     if r.status_code == 200:
         return r.text
 
